@@ -1,7 +1,12 @@
 # L-Cursive (英文書寫體習字帖產生器)
 
 > [!TIP]
-> ### 🚀 快速下載測試
+> ### 🎨 線上筆順教學網 (Live Demo)
+> **[👉 點此進入：英文書寫體筆順教學網 👈](https://digirss.github.io/L-Cursive/cursive_learning.html)**  
+> (無需安裝，直接在瀏覽器學習正確筆順)
+
+> [!TIP]
+> ### 🚀 快速下載擴充功能
 > **[👉 點此下載最新版本 ZIP 檔 👈](https://github.com/digirss/L-Cursive/releases/latest/download/L-Cursive.zip)**  
 > (下載後解壓縮，即可按照下方說明快速安裝)
 
