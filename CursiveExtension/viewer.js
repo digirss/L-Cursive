@@ -52,7 +52,12 @@ function renderWorksheet(text) {
     content.className = 'content';
     content.textContent = text;
 
+    var footer = document.createElement('div');
+    footer.className = 'branding-footer';
+    footer.innerHTML = 'L.egion <span>|</span> By 1PxAi';
+
     page.appendChild(content);
+    page.appendChild(footer);
     container.appendChild(page);
 
     console.log('[L-Cursive Viewer] Worksheet rendered');

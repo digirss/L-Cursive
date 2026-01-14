@@ -12,92 +12,93 @@
         }
 
         body {
-            width: 350px;
-            padding: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 300px;
+            width: 320px;
+            padding: 24px;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+            background: #ffffff;
+            color: #111;
         }
 
         .container {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
         }
 
         h1 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        h1::before {
-            content: '✍️';
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
         }
 
         textarea {
             width: 100%;
-            height: 100px;
+            height: 120px;
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
             font-size: 14px;
+            font-family: inherit;
             resize: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.2s;
+            margin-bottom: 12px;
+            background: #f9fafb;
         }
 
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #000;
+            background: #fff;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             color: white;
+            border-color: #000;
+            margin-bottom: 10px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            opacity: 0.85;
         }
 
         .btn-secondary {
-            background: #f5f5f5;
-            color: #333;
+            background: #fff;
+            color: #374151;
+            margin-bottom: 16px;
         }
 
         .btn-secondary:hover {
-            background: #e0e0e0;
+            background: #f9fafb;
+            border-color: #d1d5db;
         }
 
         .divider {
             height: 1px;
-            background: #e0e0e0;
-            margin: 15px 0;
+            background: #f3f4f6;
+            margin: 0 0 16px 0;
         }
 
         .status {
-            margin-top: 10px;
             padding: 10px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
             display: none;
+            text-align: center;
         }
 
         .status.show {
@@ -105,46 +106,61 @@
         }
 
         .status.error {
-            background: #ffebee;
-            color: #c62828;
+            background: #fee2e2;
+            color: #b91c1c;
         }
 
         .status.success {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: #dcfce7;
+            color: #166534;
         }
 
         .status.loading {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #eff6ff;
+            color: #1e40af;
         }
 
         .hint {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .footer {
             font-size: 11px;
-            color: #999;
-            margin-top: 15px;
-            line-height: 1.5;
+            font-weight: 700;
+            color: #9ca3af;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        .footer span {
+            font-weight: 400;
+            margin: 0 4px;
+            color: #d1d5db;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>習字帖產生器</h1>
+        <h1>L-CURSIVE</h1>
 
-        <textarea id="textInput" placeholder="在此貼上想要練習的英文文字..."></textarea>
-
-        <button id="convertBtn" class="btn btn-primary">轉換貼上的文字</button>
-
-        <div class="divider"></div>
-
-        <button id="grabBtn" class="btn btn-secondary">📄 抓取當前網頁內容</button>
+        <textarea id="textInput" placeholder="在此輸入或貼上文字..."></textarea>
 
         <div id="status" class="status"></div>
 
+        <button id="convertBtn" class="btn btn-primary">轉換習字帖</button>
+        <button id="grabBtn" class="btn btn-secondary">抓取網頁內容</button>
+
+        <div class="divider"></div>
+
         <p class="hint">
-            💡 也可以在網頁上選取文字後，按右鍵選擇「將選取文字轉為習字帖」
+            💡 提示：在網頁上選取文字後按右鍵，即可快速產生。
         </p>
+
+        <div class="footer">L.egion <span>|</span> By 1PxAi</div>
     </div>
 
     <script src="popup.js"></script>
