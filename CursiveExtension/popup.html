@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { width: 320px; padding: 15px; font-family: 'Segoe UI', sans-serif; }
+        h3 { margin-top: 0; color: #333; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; box-sizing: border-box; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        button { 
+            width: 100%; padding: 12px; margin-bottom: 8px; 
+            background: #4CAF50; color: white; border: none; 
+            cursor: pointer; border-radius: 4px; font-size: 14px;
+            transition: 0.2s;
+        }
+        button:hover { background: #45a049; }
+        button:active { transform: scale(0.98); }
+        .secondary { background: #2196F3; }
+        .secondary:hover { background: #0b7dda; }
+        .status { 
+            font-size: 12px; 
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: none;
+        }
+        .status.error { display: block; background: #ffebee; color: #c62828; }
+        .status.success { display: block; background: #e8f5e9; color: #2e7d32; }
+        .status.info { display: block; background: #e3f2fd; color: #1565c0; }
+    </style>
+</head>
+<body>
+    <h3>📝 習字帖產生器</h3>
+    
+    <textarea id="inputText" placeholder="在此貼上英文純文字..."></textarea>
+    <button id="btnFromInput">✏️ 轉換貼上的文字</button>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 12px 0;">
+
+    <button id="btnFromPage" class="secondary">📄 抓取當前網頁內容</button>
+    
+    <div id="status" class="status"></div>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const inputEl = document.getElementById('inputText');
+        
+        function showStatus(msg, type) {
+            statusEl.className = 'status ' + type;
+            statusEl.textContent = msg;
+        }
+        
+        function hideStatus() {
+            statusEl.className = 'status';
+        }
+        
+        function openViewer(text) {
+            if (!text || text.trim() === '') {
+                showStatus('沒有文字可以轉換！', 'error');
+                return;
+            }
+            
+            // 限制長度避免 URL 過長
+            const trimmedText = text.trim().substring(0, 8000);
+            const encodedText = encodeURIComponent(trimmedText);
+            const viewerUrl = chrome.runtime.getURL('viewer.html') + '?text=' + encodedText;
+            
+            showStatus('正在開啟習字帖...', 'info');
+            
+            // 使用 chrome.tabs.create 開啟新分頁
+            chrome.tabs.create({ url: viewerUrl }, (tab) => {
+                if (chrome.runtime.lastError) {
+                    showStatus('開啟失敗: ' + chrome.runtime.lastError.message, 'error');
+                } else {
+                    // 成功後關閉 popup
+                    window.close();
+                }
+            });
+        }
+
+        // 轉換貼上的文字
+        document.getElementById('btnFromInput').addEventListener('click', () => {
+            hideStatus();
+            const text = inputEl.value;
+            openViewer(text);
+        });
+
+        // 抓取當前網頁內容
+        document.getElementById('btnFromPage').addEventListener('click', () => {
+            hideStatus();
+            showStatus('正在抓取網頁內容...', 'info');
+            
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                if (!tabs || tabs.length === 0) {
+                    showStatus('找不到當前分頁', 'error');
+                    return;
+                }
+                
+                const tab = tabs[0];
+                
+                // 檢查是否可以在此頁面執行腳本
+                if (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://') || tab.url.startsWith('about:')) {
+                    showStatus('無法在此類型頁面抓取內容', 'error');
+                    return;
+                }
+                
+                chrome.scripting.executeScript({
+                    target: { tabId: tab.id },
+                    func: () => {
+                        return document.body.innerText || document.body.textContent || '';
+                    }
+                }, (results) => {
+                    if (chrome.runtime.lastError) {
+                        showStatus('抓取失敗: ' + chrome.runtime.lastError.message, 'error');
+                        return;
+                    }
+                    
+                    if (results && results[0] && results[0].result) {
+                        const pageText = results[0].result;
+                        const cleanText = pageText.replace(/\s+/g, ' ').trim();
+                        
+                        if (cleanText.length < 5) {
+                            showStatus('網頁內容太少或為空', 'error');
+                            return;
+                        }
+                        
+                        openViewer(cleanText);
+                    } else {
+                        showStatus('無法取得網頁內容', 'error');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

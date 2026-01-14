@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>英文習字帖預覽</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --line-height: 24mm;
+            --font-size: 16mm;
+            --text-color: #888;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #555;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            width: 210mm;
+            max-width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        .error-msg {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+            max-width: 500px;
+        }
+
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            width: 100%;
+            font-family: 'Sacramento', cursive;
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+            color: var(--text-color);
+            white-space: pre-wrap;
+            word-break: break-word;
+            background-image:
+                linear-gradient(to right, #aaccff 100%, transparent 0),
+                linear-gradient(to right, #aaccff 60%, transparent 0),
+                linear-gradient(to right, #ff9999 100%, transparent 0),
+                linear-gradient(to right, #aaccff 100%, transparent 0);
+            background-size: 100% 1px, 10px 1px, 100% 2px, 100% 1px;
+            background-repeat: repeat-x;
+            background-position: 0 6mm, 0 12mm, 0 18mm, 0 24mm;
+            background-attachment: local;
+        }
+
+        @media print {
+            @page {
+                margin: 0;
+                size: A4;
+            }
+
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        <button class="btn" onclick="window.print()">🖨️ 列印 / 另存 PDF (Save as PDF)</button>
+        <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #666;">列印設定請勾選「背景圖形 (Background graphics)」</p>
+    </div>
+
+    <div id="pageContainer"></div>
+
+    <script>
+        // 從 URL 參數讀取文字
+        function getTextFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('text');
+        }
+
+        // 渲染習字帖
+        function renderWorksheet(text) {
+            const container = document.getElementById('pageContainer');
+            container.innerHTML = ''; // 清空
+
+            if (!text || text.trim() === '') {
+                container.innerHTML = `
+                    <div class="error-msg">
+                        <h3>⚠️ 沒有收到文字內容</h3>
+                        <p>請透過以下方式使用此插件：</p>
+                        <ol>
+                            <li>在網頁上選取文字 → 右鍵 → 「將選取文字轉為習字帖」</li>
+                            <li>點擊插件圖示 → 貼上文字 → 「轉換貼上的文字」</li>
+                            <li>點擊插件圖示 → 「抓取當前網頁內容」</li>
+                        </ol>
+                    </div>
+                `;
+                return;
+            }
+
+            // 解碼文字
+            const decodedText = decodeURIComponent(text);
+
+            // 創建頁面
+            const page = document.createElement('div');
+            page.className = 'page';
+
+            const content = document.createElement('div');
+            content.className = 'content';
+            content.textContent = decodedText;
+
+            page.appendChild(content);
+            container.appendChild(page);
+        }
+
+        // 頁面載入時執行
+        document.addEventListener('DOMContentLoaded', () => {
+            const text = getTextFromURL();
+            renderWorksheet(text);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "英文書寫體習字帖產生器",
+  "version": "1.0",
+  "description": "將網頁文章、選取文字或貼上的內容轉換為英文書寫體習字帖 (PDF Ready)",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "contextMenus",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "製作習字帖"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
