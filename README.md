@@ -1,9 +1,5 @@
 # L-Cursive (英文書寫體習字帖產生器)
 
-> [!TIP]
-> ### 🎨 線上筆順教學網 (Live Demo)
-> **[👉 點此進入：英文書寫體筆順教學網 👈](https://1pxai.1pa.uk/tools/cursive-learning)**  
-> (無需安裝，直接在瀏覽器學習正確筆順)
 
 > [!TIP]
 > ### 🚀 快速下載擴充功能
