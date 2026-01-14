@@ -1,60 +1,74 @@
-// 建立右鍵選單的函數
-function createContextMenu() {
-  chrome.contextMenus.removeAll(() => {
+// ============================================
+// L-Cursive Extension - Background Service Worker
+// Version 2.0 - Complete Rewrite
+// ============================================
+
+console.log('[L-Cursive] Background script loaded');
+
+// 建立右鍵選單
+function setupContextMenu() {
+  // 先清除所有現有選單
+  chrome.contextMenus.removeAll(function () {
+    console.log('[L-Cursive] Cleared existing menus');
+
+    // 建立新選單
     chrome.contextMenus.create({
-      id: "convertToCursive",
-      title: "將選取文字轉為習字帖",
-      contexts: ["selection"]
-    }, () => {
+      id: 'cursive-convert',
+      title: '📝 將選取文字轉為習字帖',
+      contexts: ['selection']
+    }, function () {
       if (chrome.runtime.lastError) {
-        console.error('Menu creation failed:', chrome.runtime.lastError);
+        console.error('[L-Cursive] Menu creation error:', chrome.runtime.lastError.message);
       } else {
-        console.log('Context menu created successfully');
+        console.log('[L-Cursive] Context menu created successfully');
       }
     });
   });
 }
 
-// 安裝或更新時建立選單
-chrome.runtime.onInstalled.addListener(() => {
-  console.log('Extension installed/updated');
-  createContextMenu();
+// 當擴充功能安裝或更新時
+chrome.runtime.onInstalled.addListener(function (details) {
+  console.log('[L-Cursive] onInstalled:', details.reason);
+  setupContextMenu();
 });
 
-// Service Worker 啟動時也建立選單
-chrome.runtime.onStartup.addListener(() => {
-  console.log('Browser startup');
-  createContextMenu();
+// 當瀏覽器啟動時
+chrome.runtime.onStartup.addListener(function () {
+  console.log('[L-Cursive] onStartup');
+  setupContextMenu();
 });
 
-// 監聽右鍵點擊事件
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "convertToCursive" && info.selectionText) {
-    const selectedText = info.selectionText.trim();
-    
-    if (!selectedText) {
-      console.log('No text selected');
+// 處理右鍵選單點擊
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
+  console.log('[L-Cursive] Menu clicked:', info.menuItemId);
+
+  if (info.menuItemId === 'cursive-convert') {
+    var text = info.selectionText;
+
+    if (!text || text.trim() === '') {
+      console.log('[L-Cursive] No text selected');
       return;
     }
-    
-    console.log('Converting text:', selectedText.substring(0, 50) + '...');
-    
-    // 限制長度避免 URL 過長
-    const trimmedText = selectedText.substring(0, 8000);
-    const encodedText = encodeURIComponent(trimmedText);
-    
-    // 使用 chrome.runtime.getURL 確保正確的擴充功能 URL
-    const viewerUrl = chrome.runtime.getURL('viewer.html') + '?text=' + encodedText;
-    
-    chrome.tabs.create({ url: viewerUrl }, (newTab) => {
+
+    console.log('[L-Cursive] Selected text length:', text.length);
+
+    // 編碼文字並開啟 viewer
+    var encoded = encodeURIComponent(text.substring(0, 5000));
+    var url = chrome.runtime.getURL('viewer.html') + '?text=' + encoded;
+
+    console.log('[L-Cursive] Opening viewer URL');
+
+    chrome.tabs.create({ url: url }, function (newTab) {
       if (chrome.runtime.lastError) {
-        console.error('Failed to open viewer:', chrome.runtime.lastError);
+        console.error('[L-Cursive] Tab creation error:', chrome.runtime.lastError.message);
       } else {
-        console.log('Viewer opened in tab:', newTab.id);
+        console.log('[L-Cursive] Viewer opened in tab:', newTab.id);
       }
     });
   }
 });
 
-// 初始化時立即創建選單
-createContextMenu();
+// 立即設置選單（Service Worker 每次載入時）
+setupContextMenu();
+
+console.log('[L-Cursive] Background script initialization complete');
