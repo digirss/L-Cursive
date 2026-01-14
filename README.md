@@ -1,7 +1,7 @@
 # L-Cursive (英文書寫體習字帖產生器)
 
 > [!TIP]
-> ### 🚀 小白快速下載測試
+> ### 🚀 快速下載測試
 > **[👉 點此下載最新版本 ZIP 檔 👈](https://github.com/digirss/L-Cursive/releases/latest/download/L-Cursive.zip)**  
 > (下載後解壓縮，即可按照下方說明快速安裝)
 
