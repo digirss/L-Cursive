@@ -1,5 +1,10 @@
 # L-Cursive (英文書寫體習字帖產生器)
 
+> [!TIP]
+> ### 🚀 小白快速下載測試
+> **[👉 點此下載最新版本 ZIP 檔 👈](https://github.com/digirss/L-Cursive/releases/latest/download/L-Cursive.zip)**  
+> (下載後解壓縮，即可按照下方說明快速安裝)
+
 這是一個能將任何網頁文章、選取文字或貼上的內容轉換為「英文書寫體（Cursive）」習字帖的 Chrome 擴充功能。支援匯出高品質 PDF，方便列印練習。
 
 ## 🌟 主要功能
