@@ -183,7 +183,7 @@ export default function App() {
                   className={`
                       aspect-square rounded-md flex items-center justify-center text-3xl font-serif-display italic transition-all duration-200
                       ${selectedLetter === letter
-                      ? 'bg-indigo-500 text-white shadow-md shadow-indigo-100 -translate-y-0.5'
+                      ? 'bg-indigo-400 text-white shadow-md shadow-indigo-100 -translate-y-0.5'
                       : 'bg-slate-50 text-slate-600 hover:bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-sm'}
                     `}
                 >
