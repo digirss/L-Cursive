@@ -83,7 +83,7 @@ export default function App() {
         </div>
 
         {/* --- TOP SECTION: Workspace (Mirrored Layout) --- */}
-        <div className="flex-[0.8] grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 max-h-[50vh]">
+        <div className="flex-[0.6] grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0 max-h-[40vh]">
 
           {/* LEFT PANEL: Standard Model */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col relative group">
@@ -158,30 +158,30 @@ export default function App() {
           <div className="bg-slate-50 border-b border-slate-100 px-5 py-2 flex justify-between items-center shrink-0">
             <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Character</h2>
 
-            <div className="flex bg-slate-200 p-1.5 rounded-xl shadow-inner">
+            <div className="flex bg-slate-200 p-2 rounded-2xl shadow-inner">
               <button
                 onClick={() => toggleCase(true)}
-                className={`px-8 py-2.5 text-sm font-black rounded-lg transition-all ${isUppercase ? 'bg-white text-indigo-600 shadow-md scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`px-12 py-3 text-base font-black rounded-xl transition-all ${isUppercase ? 'bg-white text-indigo-600 shadow-lg scale-110 tracking-wider' : 'text-slate-500 hover:text-slate-700'}`}
               >
                 UPPER
               </button>
               <button
                 onClick={() => toggleCase(false)}
-                className={`px-8 py-2.5 text-sm font-black rounded-lg transition-all ${!isUppercase ? 'bg-white text-indigo-600 shadow-md scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`px-12 py-3 text-base font-black rounded-xl transition-all ${!isUppercase ? 'bg-white text-indigo-600 shadow-lg scale-110 tracking-wider' : 'text-slate-500 hover:text-slate-700'}`}
               >
                 lower
               </button>
             </div>
           </div>
 
-          <div className="p-3 overflow-y-auto">
-            <div className="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-2">
+          <div className="p-2 overflow-y-auto">
+            <div className="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-1.5">
               {ALPHABET.map((letter) => (
                 <button
                   key={letter}
                   onClick={() => handleLetterSelect(letter)}
                   className={`
-                      aspect-square rounded-md flex items-center justify-center text-lg font-serif-display italic transition-all duration-200
+                      aspect-square rounded-md flex items-center justify-center text-2xl font-serif-display italic transition-all duration-200
                       ${selectedLetter === letter
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 -translate-y-0.5'
                       : 'bg-slate-50 text-slate-600 hover:bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-md'}
