@@ -174,17 +174,17 @@ export default function App() {
             </div>
           </div>
 
-          <div className="p-2 overflow-y-auto">
-            <div className="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-1.5">
+          <div className="p-1.5 overflow-y-auto">
+            <div className="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-13 gap-1">
               {ALPHABET.map((letter) => (
                 <button
                   key={letter}
                   onClick={() => handleLetterSelect(letter)}
                   className={`
-                      aspect-square rounded-md flex items-center justify-center text-2xl font-serif-display italic transition-all duration-200
+                      aspect-square rounded-md flex items-center justify-center text-3xl font-serif-display italic transition-all duration-200
                       ${selectedLetter === letter
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 -translate-y-0.5'
-                      : 'bg-slate-50 text-slate-600 hover:bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-md'}
+                      : 'bg-slate-50 text-slate-600 hover:bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-sm'}
                     `}
                 >
                   {isUppercase ? letter : letter.toLowerCase()}
