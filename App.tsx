@@ -68,9 +68,9 @@ export default function App() {
 
         {/* Extension Promo Banner */}
         <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-5 py-3 rounded-xl flex flex-col md:flex-row items-center justify-between shadow-md border border-indigo-500/30 gap-3 shrink-0">
-          <div className="flex flex-col">
-            <h3 className="text-xs font-bold uppercase tracking-wider opacity-80 mb-0.5">推薦推薦安裝擴充功能</h3>
-            <p className="text-sm font-semibold">安裝完瀏覽器插件，就可以產生自己獨有的英文草寫習字帖。可以放到 iPad 或者電子閱讀器上手寫練習。</p>
+          <div className="flex flex-col gap-0.5">
+            <p className="text-base font-bold">安裝瀏覽器插件，可以產生自己獨有的英文草寫習字帖。</p>
+            <p className="text-base font-bold">可以安裝到 iPad 或者電子閱讀器上練習英文草寫。</p>
           </div>
           <a
             href="https://github.com/digirss/L-Cursive"
