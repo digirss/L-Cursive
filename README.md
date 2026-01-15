@@ -1,6 +1,5 @@
 # L-Cursive: 英文草寫學習系統
 
-這是一個整合了 Web 練習介面與瀏覽器擴充功能（Chrome Extension）的英文草寫教學系統。
 
 ---
 
