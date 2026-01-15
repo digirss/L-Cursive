@@ -67,7 +67,7 @@ export default function App() {
       <main className="flex-1 max-w-[1600px] mx-auto w-full p-4 gap-4 flex flex-col h-[calc(100vh-64px)] overflow-hidden">
 
         {/* Extension Promo Banner */}
-        <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-5 py-3 rounded-xl flex flex-col md:flex-row items-center justify-between shadow-md border border-indigo-500/30 gap-3 shrink-0">
+        <div className="bg-indigo-50 text-indigo-700 px-5 py-3 rounded-xl flex flex-col md:flex-row items-center justify-between shadow-sm border border-indigo-100 gap-3 shrink-0">
           <div className="flex flex-col gap-0.5">
             <p className="text-base font-bold">安裝瀏覽器插件，可以產生自己獨有的英文草寫習字帖。</p>
             <p className="text-base font-bold">可以安裝到 iPad 或者電子閱讀器上練習英文草寫。</p>
@@ -76,7 +76,7 @@ export default function App() {
             href="https://github.com/digirss/L-Cursive"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 bg-white text-indigo-600 text-[11px] font-bold rounded-lg hover:bg-indigo-50 transition-all shadow-sm whitespace-nowrap"
+            className="px-4 py-2 bg-indigo-600 text-white text-[11px] font-bold rounded-lg hover:bg-indigo-700 transition-all shadow-sm whitespace-nowrap"
           >
             前往 GitHub 下載插件 →
           </a>
@@ -183,7 +183,7 @@ export default function App() {
                   className={`
                       aspect-square rounded-md flex items-center justify-center text-3xl font-serif-display italic transition-all duration-200
                       ${selectedLetter === letter
-                      ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 -translate-y-0.5'
+                      ? 'bg-indigo-500 text-white shadow-md shadow-indigo-100 -translate-y-0.5'
                       : 'bg-slate-50 text-slate-600 hover:bg-white border border-slate-200 hover:border-indigo-300 hover:shadow-sm'}
                     `}
                 >
