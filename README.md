@@ -23,18 +23,3 @@
 
 ![產生結果](./CursiveExtension/docs/images/step3_result.jpg)
 
----
-
-## 💻 本地開發 (Web App)
-
-如果你需要開發或測試網頁版練習介面：
-
-1. **安裝依賴**:
-   `npm install`
-2. **啟動開發伺服器**:
-   `npm run dev`
-
----
-
-## 🚀 部署資訊
-網頁版目前部署於：[https://1pxai.1pa.uk/l-cursive/](https://1pxai.1pa.uk/l-cursive/)
