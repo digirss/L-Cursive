@@ -69,7 +69,7 @@ export default function App() {
         {/* Extension Promo Banner */}
         <div className="bg-indigo-50 text-indigo-700 px-5 py-3 rounded-xl flex flex-col md:flex-row items-center justify-between shadow-sm border border-indigo-100 gap-3 shrink-0">
           <div className="flex flex-col gap-0.5">
-            <p className="text-base font-bold">安裝瀏覽器插件，可以產生自己獨有的英文草寫習字帖。</p>
+            <p className="text-base font-bold">強烈推薦安裝瀏覽器插件，可以產生自己獨有的英文草寫習字帖。</p>
             <p className="text-base font-bold">可以安裝到 iPad 或者電子閱讀器上練習英文草寫。</p>
           </div>
           <a
